@@ -14,7 +14,7 @@ public class Cidade extends GenericDomain {
 	private String nome;
 
 	@ManyToOne
-	@JoinColumn(name = "estado_id")
+	@JoinColumn(name = "estado_id", nullable = false)
 	private Estado estado;
 
 	public Cidade() {

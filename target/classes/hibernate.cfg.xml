@@ -36,6 +36,7 @@
 		<mapping class="pt.amane.caroni_supermarket.domain.Estado"/>
 		<mapping class="pt.amane.caroni_supermarket.domain.Fabricante"/>
 		<mapping class="pt.amane.caroni_supermarket.domain.Cidade"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Produto"/>
 		
 			
 	</session-factory>
