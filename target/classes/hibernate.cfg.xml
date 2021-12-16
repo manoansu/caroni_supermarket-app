@@ -31,22 +31,12 @@
 		<property name="show_sql">true</property>
 
 		<!-- Cria as tabelas do banco de dados -->
-		<property name="hbm2ddl.auto">validate</property>
+		<property name="hbm2ddl.auto">create</property>
 		
 		<mapping class="pt.amane.caroni_supermarket.domain.Estado"/>
 		<mapping class="pt.amane.caroni_supermarket.domain.Fabricante"/>
 		<mapping class="pt.amane.caroni_supermarket.domain.Cidade"/>
-		<mapping class="pt.amane.caroni_supermarket.domain.Produto"/>
-		<mapping class="pt.amane.caroni_supermarket.domain.Pessoa"/>
-		<mapping class="pt.amane.caroni_supermarket.domain.Cliente"/>
-		<mapping class="pt.amane.caroni_supermarket.domain.Funcionario"/>
-		<mapping class="pt.amane.caroni_supermarket.domain.Venda"/>
-		<mapping class="pt.amane.caroni_supermarket.domain.ItemVenda"/>
-		<mapping class="pt.amane.caroni_supermarket.domain.Usuario"/>
-		<mapping class="pt.amane.caroni_supermarket.domain.Historico"/>
-		<mapping class="pt.amane.caroni_supermarket.domain.Caixa"/>
-		<mapping class="pt.amane.caroni_supermarket.domain.Movimentacao"/>
-		<mapping class="pt.amane.caroni_supermarket.domain.Menu"/>
-	
+		
+			
 	</session-factory>
 </hibernate-configuration>
