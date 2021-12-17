@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Clientes</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Listagem dos Clientes">
+			<p:dataTable emptyMessage="Nenhum registro encontrado"
+				paginator="true">
+				<f:facet name="header">
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
+				</f:facet>
+
+				<p:column headerText="Nome" sortBy="" filterBy="">
+				</p:column>
+
+				<p:column headerText="CPF">
+				</p:column>
+
+				<p:column headerText="Data de Cadastro">
+				</p:column>
+
+				<p:column headerText="Liberado">
+				</p:column>
+
+				<p:column headerText="Opções">
+				</p:column>
+			</p:dataTable>
+
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Registro dos Clientes" widgetVar="dialogo"
+		draggable="false" resizable="false" modal="true" closable="false">
+		<h:form>
+			<h:panelGrid columns="2">
+			<p:outputLabel for="pessoa" value="Pessoa:" />
+				<p:selectOneMenu id="pessoa" filter="true" required="true"
+					requiredMessage="O campo PESSOA é obrigatório!">
+					<f:selectItem itemValue="" itemLabel="Seleciona ums Pessoa" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" size="30" maxlength="50" required="true"
+					requiredMessage="O campo NOME é obrigatorio!" />
+
+				<p:outputLabel for="cpf" value="CPF:" />
+				<p:inputText id="cpf" required="true" size="10" maxlength="5"
+					requiredMessage="O campo CPF é obrigatorio!" />
+					
+				<p:outputLabel for="dtCad" value="Data de Cadastro:" />
+				<p:calendar id="dtCad" required="true"
+					requiredMessage="O campo DATA DE CADASTRO é obrigatorio!" />
+
+				<p:outputLabel value="Ativo" />
+				<p:selectBooleanCheckbox  />
+					
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide()" />
+			</h:panelGrid>
+
+		</h:form>
+	</p:dialog>
+
+</h:body>
+
+</html>
