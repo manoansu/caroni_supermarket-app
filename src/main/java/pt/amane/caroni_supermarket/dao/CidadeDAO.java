@@ -12,7 +12,7 @@ import pt.amane.caroni_supermarket.util.HibernateUtil;
 
 public class CidadeDAO extends GenericDAO<Cidade>{
 	
-		public List<Cidade> buscarPorEstado(Long estadoId){
+	public List<Cidade> buscarPorEstado(Long estadoId){
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -21,8 +21,8 @@ public class CidadeDAO extends GenericDAO<Cidade>{
 			criteria.add(Restrictions.eq("estado.id",estadoId));
 			criteria.addOrder(Order.asc("nome"));
 			@SuppressWarnings("unchecked")
-			List<Cidade> list = criteria.list();
-			return list;
+			List<Cidade> cidades = criteria.list();
+			return cidades;
 			
 		} catch (RuntimeException e) {
 			throw e;

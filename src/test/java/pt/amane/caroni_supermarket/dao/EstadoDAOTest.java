@@ -27,7 +27,7 @@ public class EstadoDAOTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void listarEstado() {
 
 		EstadoDAO estadoDAO = new EstadoDAO();
@@ -81,19 +81,21 @@ public class EstadoDAOTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void delete() {
 		
 		EstadoDAO estadoDAO = new EstadoDAO();
-		Long id = 8L;
-		Estado estado = estadoDAO.findById(id);		
-		
+		Long id = 10L;
+		Estado estado = estadoDAO.findById(id);	
+				
 		if(estado == null) {
 			System.out.println("Register not found!");
-		}else {
+		}else if(estado.getCidades() == null){
 			System.out.println("Register Found!");
 			estadoDAO.delete(estado);
 			System.out.println("Registe removed successfull!");
+		}else {
+			System.out.println("Error, state can not be removed. It as city associate!");
 		}
 	}
 

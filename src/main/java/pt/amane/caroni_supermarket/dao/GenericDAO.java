@@ -58,8 +58,8 @@ public class GenericDAO<T> {
 			@SuppressWarnings("deprecation")
 			Criteria criteria = session.createCriteria(classe);
 			@SuppressWarnings("unchecked")
-			List<T> list = criteria.list();
-			return list;
+			List<T> obj = criteria.list();
+			return obj;
 
 		} catch (RuntimeException e) {
 			throw e;
@@ -76,8 +76,8 @@ public class GenericDAO<T> {
 			Criteria criteria = session.createCriteria(classe);
 			criteria.addOrder(Order.asc(campoOrdenacao));
 			@SuppressWarnings("unchecked")
-			List<T> list = criteria.list();
-			return list;
+			List<T> obj = criteria.list();
+			return obj;
 
 		} catch (RuntimeException e) {
 			throw e;

@@ -36,12 +36,12 @@ public class CidadeDAOTest {
 	public void listar() {
 		
 		CidadeDAO cidadeDAO = new CidadeDAO();
-		List<Cidade> list = cidadeDAO.findAll();
+		List<Cidade> cidades = cidadeDAO.findAll();
 		
-		for(Cidade cidade: list) {
-			System.out.println("Id: " + cidade.getId() + " Nome: " + cidade.getNome() + 
-					"\nCodigo de Estado: " + cidade.getEstado().getId() + " Nome: " +
-					cidade.getEstado().getNome() + " Sigla:" + cidade.getEstado().getSigla() + "\n");
+		for(Cidade cidade: cidades) {
+			System.out.println("Cidade: " + cidade.getId() + " " + cidade.getNome() + 
+					"\nEstado: " + cidade.getEstado().getId() + " " +
+					cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
 		}
 	}
 
@@ -49,31 +49,37 @@ public class CidadeDAOTest {
 	@Ignore
 	public void buscar() {
 		
-		Long codigo = 12L;
+		Long codigo = 5L;
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		Cidade cidade = cidadeDAO.findById(codigo);
-		System.out.println("Id: " + cidade.getId() + " Nome: " + cidade.getNome() + 
-				"\nCodigo de Estado: " + cidade.getEstado().getId() + " Nome: " +
-				cidade.getEstado().getNome() + " Sigla:" + cidade.getEstado().getSigla() + "\n");
+		
+		if(cidade == null) {
+			System.out.println("Register not found!");
+		}else {		
+			System.out.println("Register founded!");
+			System.out.println("Cidade: " + cidade.getId() + " " + cidade.getNome() + 
+					"\nEstado: " + cidade.getEstado().getId() + " " +
+					cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
+		}
 	}
 	
 	@Test
 	@Ignore
 	public void excluir() {
 		
-		Long codigo = 15L;
+		Long cidadeId = 15L;
 		CidadeDAO cidadeDAO = new CidadeDAO();
-		Cidade cidade = cidadeDAO.findById(codigo);
+		Cidade cidade = cidadeDAO.findById(cidadeId);		
 		
 		if (cidade == null) {
-			System.out.println("Nenhum registro encontrado");
+			System.out.println("Register not found");
 		}else {
-			System.out.println("registro encontrado\n");
+			System.out.println("register founded!\n");
 			cidadeDAO.delete(cidade);
-			System.out.println("Cidade Removida!!");
-			System.out.println("Id: " + cidade.getId() + " Nome: " + cidade.getNome() + 
-					"\nCodigo de Estado: " + cidade.getEstado().getId() + " Nome: " +
-					cidade.getEstado().getNome() + " Sigla:" + cidade.getEstado().getSigla() + "\n");
+			System.out.println("City Removed successfuly!!");
+			System.out.println("Cidade: " + cidade.getId() + " " + cidade.getNome() + 
+					"\nEstado: " + cidade.getEstado().getId() + " " +
+					cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
 		}		
 	}
 	
@@ -82,21 +88,27 @@ public class CidadeDAOTest {
 	@Ignore
 	public void editar() {
 		
-		Long codigo = 15L;
+		Long cidadeId = 15L;
 		CidadeDAO cidadeDAO = new CidadeDAO();
-		Cidade cidade = cidadeDAO.findById(codigo);
+		Cidade cidade = cidadeDAO.findById(cidadeId);
 		
-		cidade.setNome("Guarapuava");
+		Long estadoId = 10L;
+		EstadoDAO estadoDAO = new EstadoDAO();
+		Estado estado = estadoDAO.findById(estadoId);
 		
-		if (cidade == null) {
-			System.out.println("Nenhum registro encontrado");
+		if(estado == null) {
+			System.out.println("State not found!");
+		}else if (cidade == null) {
+			System.out.println("Register not found!");
 		}else {
-			System.out.println("registro encontrado\n");
-			cidadeDAO.delete(cidade);
-			System.out.println("Cidade Removida!!");
-			System.out.println("Id: " + cidade.getId() + " Nome: " + cidade.getNome() + 
-					"\nCodigo de Estado: " + cidade.getEstado().getId() + " Nome: " +
-					cidade.getEstado().getNome() + " Sigla:" + cidade.getEstado().getSigla() + "\n");
+			System.out.println("register founded!\n");
+			cidade.setNome("Guarapuava");
+			cidade.setEstado(estado);
+			cidadeDAO.merge(cidade);
+			System.out.println("City Removed successfuly!!");
+			System.out.println("Cidade: " + cidade.getId() + " " + cidade.getNome() + 
+					"\nEstado: " + cidade.getEstado().getId() + " " +
+					cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
 		}		
 		
 	}
@@ -107,12 +119,12 @@ public class CidadeDAOTest {
 		
 		Long estadoId = 3L;
 		CidadeDAO cidadeDAO = new CidadeDAO();
-		List<Cidade> list = cidadeDAO.buscarPorEstado(estadoId);
+		List<Cidade> cidades = cidadeDAO.buscarPorEstado(estadoId);
 		
-		for(Cidade cidade: list) {
-			System.out.println("Id: " + cidade.getId() + " Nome: " + cidade.getNome() + 
-					"\nCodigo de Estado: " + cidade.getEstado().getId() + " Nome: " +
-					cidade.getEstado().getNome() + " Sigla:" + cidade.getEstado().getSigla() + "\n");
+		for(Cidade cidade: cidades) {
+			System.out.println("Cidade: " + cidade.getId() + " " + cidade.getNome() + 
+					"\nEstado: " + cidade.getEstado().getId() + " " +
+					cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
 		}
 	}
 

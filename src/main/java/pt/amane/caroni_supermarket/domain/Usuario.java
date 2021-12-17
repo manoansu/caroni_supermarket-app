@@ -2,8 +2,13 @@ package pt.amane.caroni_supermarket.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
+import pt.amane.caroni_supermarket.enumerado.TipoUsuario;
 
 @Entity
 public class Usuario extends GenericDomain {
@@ -13,11 +18,15 @@ public class Usuario extends GenericDomain {
 	@Column(nullable = false, length = 32)
 	private String senha;
 
-	@Column(nullable = false)
-	private Character tipo;
+	@Transient
+	private String senhSemCriptografia; // esse campo faz parte de persistente, mas nao esta guardado na base de dado..
 
 	@Column(nullable = false)
 	private boolean ativo;
+
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private TipoUsuario tipoUsuario; // tipo enumerado..
 
 	@OneToOne
 	@JoinColumn(name = "pessoa_id", nullable = false)
@@ -26,9 +35,9 @@ public class Usuario extends GenericDomain {
 	public Usuario() {
 	}
 
-	public Usuario(String senha, Character tipo, boolean ativo, Pessoa pessoa) {
+	public Usuario(String senha, TipoUsuario tipoUsuario, boolean ativo, Pessoa pessoa) {
 		this.senha = senha;
-		this.tipo = tipo;
+		this.tipoUsuario = tipoUsuario;
 		this.ativo = ativo;
 		this.pessoa = pessoa;
 	}
@@ -41,12 +50,20 @@ public class Usuario extends GenericDomain {
 		this.senha = senha;
 	}
 
-	public Character getTipo() {
-		return tipo;
+	public String getSenhSemCriptografia() {
+		return senhSemCriptografia;
 	}
 
-	public void setTipo(Character tipo) {
-		this.tipo = tipo;
+	public void setSenhSemCriptografia(String senhSemCriptografia) {
+		this.senhSemCriptografia = senhSemCriptografia;
+	}
+
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
 	public boolean isAtivo() {
@@ -64,10 +81,42 @@ public class Usuario extends GenericDomain {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
+	
+	/**
+	 * informa para o hibernate que este metodo só serve para formatação e nao é um
+	 * campo fisico de BD ou seja, nao faz parte de BD caso usa validate ou update
+	 * para BD no hibernate .cfg.xml.
+	 * 
+	 * @return
+	 */
+
+//	@Transient
+//	public String getTipoFormatado() {
+//
+//		String tpFormatado = null;
+//
+//		switch (tipo) {
+//		case 'A':
+//			tpFormatado = "Administrador";
+//			break;
+//		case 'B':
+//			tpFormatado = "Gerente";
+//			break;
+//		case 'C':
+//			tpFormatado = "Balconista";
+//			break;
+//		default:
+//			System.out.println("O tipo escolhido não existe");
+//			break;
+//		}
+//
+//		return tpFormatado;
+//	}
 
 	@Override
 	public String toString() {
-		return "Usuario [senha=" + senha + ", tipo=" + tipo + ", ativo=" + ativo + ", pessoa=" + pessoa + "]";
+		return "Usuario [senha=" + senha + ", senhSemCriptografia=" + senhSemCriptografia + ", ativo=" + ativo
+				+ ", tipoUsuario=" + tipoUsuario + ", pessoa=" + pessoa + "]";
 	}
 
 }

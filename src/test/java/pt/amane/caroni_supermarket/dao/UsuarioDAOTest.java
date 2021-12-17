@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import pt.amane.caroni_supermarket.domain.Pessoa;
 import pt.amane.caroni_supermarket.domain.Usuario;
-import pt.amane.supermarket.b.enumeracao.TipoUsuario;
+import pt.amane.caroni_supermarket.enumerado.TipoUsuario;
 
 public class UsuarioDAOTest {
 	
@@ -45,7 +45,7 @@ public class UsuarioDAOTest {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		Usuario usuario = usuarioDAO.autenticar(cpf, senha);
 		
-		System.out.println("Usuarui Autenticado: " + usuario);
+		System.out.println("Usuario Autenticado: " + usuario);
 
 	}
 

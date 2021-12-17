@@ -13,22 +13,23 @@ public class ProdutoDAOTest {
 	
 	@SuppressWarnings({ "removal" })
 	@Test
-	@Ignore
+	//@Ignore
 	public void salvar() {
 		
 		FabricanteDAO fabricantDao = new FabricanteDAO();
-		Fabricante fabricante = fabricantDao.findById(new Long("3"));
+		Long produtoId = 2L;
+		Fabricante fabricante = fabricantDao.findById(produtoId);
 		
 		Produto produto = new Produto();
-		produto.setDescricao("Cataflan 50mg com 20 comprimidos");
+		produto.setDescricao("Caderno de Linha");
 		produto.setFabricante(fabricante);
-		produto.setPreco(new BigDecimal("13.70"));
-		produto.setQuantidade(new Short("7"));
+		produto.setPreco(new BigDecimal("5.60"));
+		produto.setQuantidade(new Short("4"));
 		
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 		produtoDAO.salvar(produto);
 		
-		System.out.println("Produto salvo com sucesso!!");
+		System.out.println("Product saved  successfuly!!");
 		
 	}
 	
@@ -66,7 +67,7 @@ public class ProdutoDAOTest {
 	
 	@SuppressWarnings("unused")
 	@Test
-	//@Ignore
+	@Ignore
 	public void excluir() {
 		
 		ProdutoDAO produtoDao = new ProdutoDAO();
