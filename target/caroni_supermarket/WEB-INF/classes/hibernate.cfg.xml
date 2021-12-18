@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+     
+ <hibernate-configuration>
+
+	<session-factory>
+	
+	<!-- Db connection configuration -->
+	<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/caroni_supermarket</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password"></property>
+
+		<!-- Pool de Conexões -->
+		<property name="connection.pool_size">100</property>
+
+		<!-- SQL dialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+		<!-- property name="dialect">org.hibernate.dialect.MySQL8Dialect</property-->
+
+		<!-- Gerenciamento do Contexto das Sessões -->
+		<property name="current_session_context_class">thread</property>
+
+		<!-- Cache de Segundo Nível -->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+		<!-- Mostra as SQLs Geradas -->
+		<property name="show_sql">true</property>
+
+		<!-- Cria as tabelas do banco de dados -->
+		<property name="hbm2ddl.auto">validate</property>
+		
+		<mapping class="pt.amane.caroni_supermarket.domain.Caixa"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Cidade"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Cliente"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Estado"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Fabricante"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Funcionario"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Historico"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.ItemVenda"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Movimentacao"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Menu"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Produto"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Pessoa"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Usuario"/>
+		<mapping class="pt.amane.caroni_supermarket.domain.Venda"/>
+		
+		
+		
+			
+	</session-factory>
+</hibernate-configuration>

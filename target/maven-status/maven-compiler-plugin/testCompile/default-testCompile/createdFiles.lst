@@ -1,0 +1,13 @@
+pt\amane\caroni_supermarket\dao\ClienteDAOTest.class
+pt\amane\caroni_supermarket\dao\EstadoDAOTest.class
+pt\amane\caroni_supermarket\dao\CaixaDAOTest.class
+pt\amane\caroni_supermarket\dao\PessoaDAOTest.class
+pt\amane\caroni_supermarket\dao\FabricanteDAOTest.class
+pt\amane\caroni_supermarket\dao\ProdutoDAOTest.class
+pt\amane\caroni_supermarket\util\HibernateUtilTest.class
+pt\amane\caroni_supermarket\dao\UsuarioDAOTest.class
+pt\amane\caroni_supermarket\dao\ItemVendaDAOTest.class
+pt\amane\caroni_supermarket\dao\CidadeDAOTest.class
+pt\amane\caroni_supermarket\dao\MenuDAOTest.class
+pt\amane\caroni_supermarket\dao\FuncionariDAOTest.class
+pt\amane\caroni_supermarket\dao\VendaDAOTest.class

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Vendas</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Listagem das Vendas">
+			<p:dataTable emptyMessage="Nenhum registro encontrado"
+				paginator="true">
+				<f:facet name="header">
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
+				</f:facet>
+
+				<p:column headerText="Horário" sortBy="" filterBy="">
+				</p:column>
+
+				<p:column headerText="Preço Total">
+				</p:column>
+
+				<p:column headerText="Cliente">
+				</p:column>
+
+				<p:column headerText="Funcionario">
+				</p:column>
+
+				<p:column headerText="Opções">
+				</p:column>
+			</p:dataTable>
+
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Registro de Vendas" widgetVar="dialogo"
+		draggable="false" resizable="false" modal="true" closable="false">
+		<h:form>
+			<h:panelGrid columns="2">
+				<p:outputLabel for="cliente" value="Cliente:" />
+				<p:selectOneMenu id="cliente" filter="true" required="true"
+					requiredMessage="O campo CLIENTE é obrigatório!">
+					<f:selectItem itemValue="" itemLabel="Seleciona um Cliente" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="funcionario" value="Funcionario:" />
+				<p:selectOneMenu id="funcionario" filter="true" required="true"
+					requiredMessage="O campo FUNCIONARIO é obrigatório!">
+					<f:selectItem itemValue="" itemLabel="Seleciona um Funcionario" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="horario" value="Horário:" />
+				<p:calendar id="horario" required="true"
+					requiredMessage="O campo HORARIO é obrigatorio!" />
+
+				<p:outputLabel for="precoTotal" value="Preço Total:" />
+				<p:inputText id="precoTotal" required="true" size="10" maxlength="5"
+					requiredMessage="O campo PREÇO TOTAL é obrigatorio!" />
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide()" />
+			</h:panelGrid>
+
+		</h:form>
+	</p:dialog>
+
+</h:body>
+
+</html>

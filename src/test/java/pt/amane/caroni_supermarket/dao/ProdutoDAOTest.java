@@ -13,7 +13,7 @@ public class ProdutoDAOTest {
 	
 	@SuppressWarnings({ "removal" })
 	@Test
-	//@Ignore
+	@Ignore
 	public void salvar() {
 		
 		FabricanteDAO fabricantDao = new FabricanteDAO();
@@ -71,7 +71,7 @@ public class ProdutoDAOTest {
 	public void excluir() {
 		
 		ProdutoDAO produtoDao = new ProdutoDAO();
-		Long codigo = 8L;
+		Long codigo = 3L;
 		
 		FabricanteDAO fabricanteDAO = new FabricanteDAO();
 		Fabricante fabricante = fabricanteDAO.findById(codigo);
@@ -97,10 +97,11 @@ public class ProdutoDAOTest {
 	
 	@SuppressWarnings("unused")
 	@Test
+	@Ignore
 	public void editar() {
 		
 		ProdutoDAO produtoDao = new ProdutoDAO();
-		Long codigo = 8L;
+		Long codigo = 5L;
 		
 		FabricanteDAO fabricanteDAO = new FabricanteDAO();
 		Fabricante fabricante = fabricanteDAO.findById(codigo);
