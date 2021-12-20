@@ -23,4 +23,9 @@
 		<url-pattern>*.xhtml</url-pattern>
 		<!-- Define qual é o tipo de xhtml que nos stamos usando -->
 	</servlet-mapping>
+
+	<!-- Carregamento de Hibernate -->
+	<listener>
+		<listener-class>pt.amane.caroni_supermarket.util.HibernateUtil</listener-class>
+	</listener>
 </web-app>

@@ -1,11 +1,7 @@
 package pt.amane.caroni_supermarket.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Estado extends GenericDomain {
@@ -18,8 +14,8 @@ public class Estado extends GenericDomain {
 	@Column(nullable = false, length = 50)
 	private String nome;
 
-	@OneToMany(mappedBy = "estado")
-	private List<Cidade> cidades = new ArrayList<Cidade>();
+//	@OneToMany(mappedBy = "estado")
+//	private List<Cidade> cidades = new ArrayList<Cidade>();
 
 	public Estado() {
 	}
@@ -46,13 +42,13 @@ public class Estado extends GenericDomain {
 		this.nome = nome;
 	}
 
-	public List<Cidade> getCidades() {
-		return cidades;
-	}
+//	public List<Cidade> getCidades() {
+//		return cidades;
+//	}
 
 	@Override
 	public String toString() {
-		return "Estado [sigla=" + sigla + ", nome=" + nome + ", cidades=" + cidades + "]";
+		return "Estado [sigla=" + sigla + ", nome=" + nome +"]";
 	}
 
 

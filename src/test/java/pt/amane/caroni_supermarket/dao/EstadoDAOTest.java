@@ -36,9 +36,9 @@ public class EstadoDAOTest {
 		for(Estado estado : estadoDAO.findAll()) {
 			System.out.println("Id: " + estado.getId() + " " + estado.getNome() + "-" + 
 					estado.getSigla() + "\nCidade: ");
-			for(Cidade cidade: estado.getCidades()) {
-				System.out.println("Id: " + cidade.getNome());
-			}
+//			for(Cidade cidade: estado.getCidades()) {
+//				System.out.println("Id: " + cidade.getNome());
+//			}
 		}
 	}
 
@@ -90,12 +90,12 @@ public class EstadoDAOTest {
 				
 		if(estado == null) {
 			System.out.println("Register not found!");
-		}else if(estado.getCidades() == null){
+		}else { //if(estado.getCidades() == null){
 			System.out.println("Register Found!");
 			estadoDAO.delete(estado);
 			System.out.println("Registe removed successfull!");
-		}else {
-			System.out.println("Error, state can not be removed. It as city associate!");
+//		}else {
+//			System.out.println("Error, state can not be removed. It as city associate!");
 		}
 	}
 

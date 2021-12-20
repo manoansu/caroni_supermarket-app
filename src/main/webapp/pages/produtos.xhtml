@@ -10,59 +10,123 @@
 	<title>Produtos</title>
 </h:head>
 <h:body>
-	<h:form>
+	<p:growl id="message" />
+	<h:form id="formListagem">
 		<p:panel header="Listagem dos Produtos">
-			<p:dataTable emptyMessage="Nenhum registro encontrado"
-				paginator="true">
+			<p:dataTable id="table" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{produtoBean.produtos}" var="produto"
+				rows="5" paginatorPosition="top">
 				<f:facet name="header">
-					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
-				</f:facet>
+					<p:commandButton icon="ui-icon-plus"
+						oncomplete="PF('dialogo').show();"
+						actionListener="#{produtoBean.novo}"
+						update=":message :formCadProduto:panelProduto">
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
 
-				<p:column headerText="Descrição" sortBy="" filterBy="">
+				</f:facet>
+				<p:column headerText="Descrição" sortBy="#{produto.descricao}"
+					filterBy="#{produto.descricao}">
+					<h:outputText value="#{produto.descricao}" />
 				</p:column>
 
 				<p:column headerText="Quantidade">
+					<h:outputText value="#{produto.quantidade}" />
 				</p:column>
 
 				<p:column headerText="Preço">
+					<h:outputText value="#{produto.preco}">
+						<f:convertNumber locale="pt" minFractionDigits="2" />
+					</h:outputText>
 				</p:column>
 
 				<p:column headerText="Fabricante">
+					<h:outputText value="#{produto.fabricante.descricao}" />
 				</p:column>
 
 				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{produtoBean.excluir}"
+						update=":message :formListagem:table">
+						<p:confirm header="Confirmation"
+							message="Are you sure you want to delete produto?"
+							icon="ui icon-alert" />
+						<f:attribute name="produtoSelecionado" value="#{produto}" />
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{produtoBean.editar}"
+						update=":message :formCadProduto:panelProduto"
+						oncomplete="PF('dialogo').show();">
+						<!-- Para atualizar a tela  -->
+						<f:attribute name="produtoSelecionado" value="#{produto}" />
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+					</p:commandButton>
+
 				</p:column>
 			</p:dataTable>
+
+			<p:confirmDialog global="true">
+				<p:commandButton value="Yes" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<!-- se clicar yes ele aciona o metodo editar ou excluir.. -->
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no ui-button-flat"
+					icon="ui-icon-close" />
+			</p:confirmDialog>
 
 		</p:panel>
 	</h:form>
 
-	<p:dialog header="Registro dos Produtos" widgetVar="dialogo"
-		draggable="false" resizable="false" modal="true" closable="false">
-		<h:form>
-			<h:panelGrid columns="2">
-				<p:outputLabel for="fabricante" value="Fabricante:" />
-				<p:selectOneMenu id="fabricante" filter="true" required="true"
-					requiredMessage="O campo FABRICANTE é obrigatório!">
-					<f:selectItem itemValue="" itemLabel="Seleciona um Fabricante" />
+	<p:dialog header="Cadastro dos Produtos" widgetVar="dialogo"
+		draggable="true" resizable="false" modal="true" closable="false">
+		<h:form id="formCadProduto" enctype="multipart/form-data">
+			<h:panelGrid id="panelProduto" columns="2">
+				<p:outputLabel value="Fabricante:" />
+				<p:selectOneMenu filter="true"
+					value="#{produtoBean.produto.fabricante}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="O campo FABRICANTE é obrigatório">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Selecione um fabricante" />
+					<f:selectItems value="#{produtoBean.fabricantes}" var="fabricante"
+						itemValue="#{fabricante}" itemLabel="#{fabricante.descricao}" />
 				</p:selectOneMenu>
 
-				<p:outputLabel for="descricao" value="Descrição" />
-				<p:inputText id="descricao" size="30" maxlength="80" required="true"
-					requiredMessage="O campo DESCRIÇÃO é obrigatorio!" />
+				<p:outputLabel for="descricao" value="Descrição:" />
+				<p:inputText id="descricao" maxlength="50" size="30"
+					value="#{produtoBean.produto.descricao}" required="true"
+					requiredMessage="O campo Descrição é Obrigatório!" />
 
 				<p:outputLabel for="qtd" value="Quantidade:" />
-				<p:inputText id="qtd" required="true" size="10" maxlength="5"
-					requiredMessage="O campo QUANTIDADE é obrigatorio!" />
-					
-					<p:outputLabel for="preco" value="Preço:" />
-				<p:inputText id="preco" size="10" maxlength="7" required="true"
-					requiredMessage="O campo PREÇO é obrigatorio!" />
+				<p:inputText id="qtd" maxlength="5" size="10"
+					value="#{produtoBean.produto.quantidade}" required="true"
+					requiredMessage="O campo Quantidadde é obrigatório!"
+					converterMessage="Informe o valor inteiro para o campo Quantidade!"
+					validatorMessage="Informe o valor entre 0 e 1000 para o campo Quantidade!">
+					<f:validateLongRange minimum="0" maximum="1000" />
+				</p:inputText>
+
+				<p:outputLabel for="preco" value="Preço:" />
+				<p:inputText id="preco" maxlength="7" size="10"
+					value="#{produtoBean.produto.preco}" required="true"
+					requiredMessage="O campo Preço é Obrigatório!"
+					converterMessage="Informe o valor inteiro para o campo Preço"
+					validatorMessage="Informe o valor entre 0,00 e 9999,99 para o cmpo Preço!">
+					<f:validateDoubleRange minimum="0.00" maximum="9999.99 " />
+					<f:convertNumber locale="pt" minFractionDigits="2" />
+				</p:inputText>
+
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" />
-				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide()" />
+				<p:commandButton value="Salvar"
+					actionListener="#{produtoBean.salvar}"
+					update=":message :formCadProduto:panelProduto :formListagem:table" />
+				<p:commandButton value="Fehar" oncomplete="PF('dialogo').hide();" />
 			</h:panelGrid>
 
 		</h:form>
