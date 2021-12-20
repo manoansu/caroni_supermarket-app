@@ -1,15 +1,17 @@
 package pt.amane.caroni_supermarket.bean;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
 import pt.amane.caroni_supermarket.dao.EstadoDAO;
+import pt.amane.caroni_supermarket.domain.Cidade;
 import pt.amane.caroni_supermarket.domain.Estado;
 
 /**
@@ -35,7 +37,9 @@ import pt.amane.caroni_supermarket.domain.Estado;
  */
 @ViewScoped
 @ManagedBean
-public class EstadoBean {
+public class EstadoBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private Estado estado;
 	
@@ -57,6 +61,9 @@ public class EstadoBean {
 		estado = new Estado();
 	}
 	
+	/**
+	 * é chamado como um constructor da classe
+	 */
 	@PostConstruct
 	public void listar() {
 		
@@ -64,7 +71,8 @@ public class EstadoBean {
 			EstadoDAO estadoDAO = new EstadoDAO();
 			estados = estadoDAO.findAll("nome");
 		} catch (Exception e) {
-			Messages.addGlobalError("Erro ao tentar listar o estado!");
+			Messages.addGlobalError("Error trying to list state!");
+			e.printStackTrace();
 		}
 	}
 
@@ -77,12 +85,34 @@ public class EstadoBean {
 			novo();
 			estados = estadoDAO.findAll("nome");
 			
-			Messages.addGlobalInfo("Estado Salvo com sucesso!");
+			Messages.addGlobalInfo("Successfully saved state!");
 		} catch (Exception e) {
-			Messages.addGlobalError("Erro ao tentar salvar estado!!");
+			Messages.addGlobalError("Error trying to saved state!!");
+			e.printStackTrace();
 		}
+	}
+	
+	public void editar(ActionEvent event) {
+		estado = (Estado) event.getComponent().getAttributes().get("estadoSelecionado");
+	}
+	
+	public void excluir(ActionEvent event) {
+		estado = (Estado) event.getComponent().getAttributes().get("estadoSelecionado");
 		
-
+		Cidade cidade = new Cidade();
+		cidade.setEstado(estado);
+		
+		try {
+			EstadoDAO estadoDAO = new EstadoDAO();
+			estadoDAO.delete(estado);
+			
+			novo();
+			estados = estadoDAO.findAll("nome");
+			Messages.addGlobalInfo("Successfully removed state!");
+			
+		} catch (Exception e) {
+			Messages.addGlobalError("Error trying to removed state!");
+		}
 	}
 
 }
