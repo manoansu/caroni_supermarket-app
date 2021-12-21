@@ -26,9 +26,9 @@
 					</p:commandButton>
 				</f:facet>
 
-				<p:column headerText="Nome" sortBy="#{pessoa.name}"
-					filterBy="#{pessoa.name}">
-					<h:outputText value="#{pessoa.name}" />
+				<p:column headerText="Nome" sortBy="#{pessoa.nome}"
+					filterBy="#{pessoa.nome}">
+					<h:outputText value="#{pessoa.nome}" />
 				</p:column>
 
 				<p:column headerText="CPF">
@@ -36,7 +36,7 @@
 				</p:column>
 
 				<p:column headerText="Email">
-					<h:outputText value="#{pessoa.name}" />
+					<h:outputText value="#{pessoa.email}" />
 				</p:column>
 
 				<p:column headerText="Telefone">
@@ -112,7 +112,7 @@
 
 
 				<p:outputLabel for="nome" value="Nome" />
-				<p:inputText id="nome" value="#{pessoaBean.pessoa.name}" size="30"
+				<p:inputText id="nome" value="#{pessoaBean.pessoa.nome}" size="30"
 					maxlength="50" required="true"
 					requiredMessage="O campo NOME é obrigatorio!" />
 

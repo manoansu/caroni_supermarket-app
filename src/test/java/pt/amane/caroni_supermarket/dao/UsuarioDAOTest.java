@@ -17,7 +17,7 @@ public class UsuarioDAOTest {
 		Pessoa pessoa = pessoaDAO.findById(2L);
 		
 		System.out.println("Pessoa Encontrada");
-		System.out.println("Nome: " + pessoa.getName());
+		System.out.println("Nome: " + pessoa.getNome());
 		System.out.println("CPF: " + pessoa.getCpf());
 		
 				

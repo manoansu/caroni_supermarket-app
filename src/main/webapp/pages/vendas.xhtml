@@ -10,24 +10,34 @@
 	<title>Vendas</title>
 </h:head>
 <h:body>
-	<h:form>
-		<p:panel header="Listagem das Vendas">
+	<p:growl id="message" />
+	<h:form id="formListagem">
+		<p:panel id="table" header="Listagem das Vendas">
 			<p:dataTable emptyMessage="Nenhum registro encontrado"
-				paginator="true">
+				paginator="true" value="#{vendaBean.vendas}" var="venda" rows="5"
+				paginatorPosition="top">
 				<f:facet name="header">
-					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
+					<p:commandButton icon="ui-icon-plus"
+						actionListener="#{vendaBean.novo()}"
+						oncomplete="PF('dialogo').show();"
+						update="formCadVenda:panelVenda" />
 				</f:facet>
 
-				<p:column headerText="Horário" sortBy="" filterBy="">
+				<p:column headerText="Horário" sortBy="#{venda.horario}"
+					filterBy="#{venda.horario}">
+					<h:outputText value="#{venda.horario}" />
 				</p:column>
 
 				<p:column headerText="Preço Total">
+					<h:outputText value="#{venda.precototal}" />
 				</p:column>
 
 				<p:column headerText="Cliente">
+					<h:outputText value="#{venda.cliente.pessoa.nome}" />
 				</p:column>
 
 				<p:column headerText="Funcionario">
+					<h:outputText value="#{venda.funcionario.pessoa.nome}" />
 				</p:column>
 
 				<p:column headerText="Opções">
@@ -39,32 +49,42 @@
 
 	<p:dialog header="Registro de Vendas" widgetVar="dialogo"
 		draggable="false" resizable="false" modal="true" closable="false">
-		<h:form>
-			<h:panelGrid columns="2">
+		<h:form id="formCadVenda">
+			<h:panelGrid id="panelVenda" columns="2">
 				<p:outputLabel for="cliente" value="Cliente:" />
-				<p:selectOneMenu id="cliente" filter="true" required="true"
+				<p:selectOneMenu id="cliente" value="#{vendaBean.venda.cliente}"
+					filter="true" required="true"
 					requiredMessage="O campo CLIENTE é obrigatório!">
-					<f:selectItem itemValue="" itemLabel="Seleciona um Cliente" />
+					<f:selectItem itemLabel="Seleciona um Cliente" />
+					<f:selectItems value="#{vendaBean.clientes}" var="cliente"
+						itemValue="#{cliente}" itemLabel="#{cliente.pessoa.nome} - #{cliente.pessoa.cpf}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel for="funcionario" value="Funcionario:" />
-				<p:selectOneMenu id="funcionario" filter="true" required="true"
+				<p:selectOneMenu id="funcionario"
+					value="#{vendaBean.venda.funcionario}" filter="true"
+					required="true"
 					requiredMessage="O campo FUNCIONARIO é obrigatório!">
-					<f:selectItem itemValue="" itemLabel="Seleciona um Funcionario" />
+					<f:selectItem itemLabel="Seleciona um Funcionario" />
+					<f:selectItems value="#{vendaBean.funcionarios}" var="funcionario"
+						itemValue="#{funcionario}" itemLabel="#{funcionario.pessoa.nome}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel for="horario" value="Horário:" />
-				<p:calendar id="horario" required="true"
-					requiredMessage="O campo HORARIO é obrigatorio!" />
+				<p:calendar id="horario" value="#{vendaBean.venda.horario}"
+					required="true" requiredMessage="O campo HORARIO é obrigatorio!" />
 
 				<p:outputLabel for="precoTotal" value="Preço Total:" />
-				<p:inputText id="precoTotal" required="true" size="10" maxlength="5"
+				<p:inputText id="precoTotal" value="#{vendaBean.venda.precototal}"
+					required="true" size="10" maxlength="5"
 					requiredMessage="O campo PREÇO TOTAL é obrigatorio!" />
 
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" />
+				<p:commandButton value="Salvar"
+					actionListener="#{vendaBean.salvar()}"
+					update=":message :formCadVenda:panelVenda :formListagem:table" />
 				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide()" />
 			</h:panelGrid>
 

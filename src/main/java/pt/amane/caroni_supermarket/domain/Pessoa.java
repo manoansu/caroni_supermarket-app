@@ -51,9 +51,9 @@ public class Pessoa extends GenericDomain {
 	public Pessoa() {
 	}
 
-	public Pessoa(String name, String cpf, String rg, String rua, Short numero, String bairro, String cep,
+	public Pessoa(String nome, String cpf, String rg, String rua, Short numero, String bairro, String cep,
 			String complemento, String telefone, String celular, String email, Cidade cidade) {
-		this.nome = name;
+		this.nome = nome;
 		this.cpf = cpf;
 		this.rg = rg;
 		this.rua = rua;
@@ -67,12 +67,12 @@ public class Pessoa extends GenericDomain {
 		this.cidade = cidade;
 	}
 
-	public String getName() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setName(String name) {
-		this.nome = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getCpf() {
@@ -165,7 +165,7 @@ public class Pessoa extends GenericDomain {
 
 	@Override
 	public String toString() {
-		return "Pessoa [name=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", rua=" + rua + ", numero=" + numero
+		return "Pessoa [nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", rua=" + rua + ", numero=" + numero
 				+ ", bairro=" + bairro + ", cep=" + cep + ", complemento=" + complemento + ", telefone=" + telefone
 				+ ", celular=" + celular + ", email=" + email + ", cidade=" + cidade + "]";
 	}
