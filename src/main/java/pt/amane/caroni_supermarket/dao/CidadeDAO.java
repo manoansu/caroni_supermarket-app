@@ -17,11 +17,16 @@ public class CidadeDAO extends GenericDAO<Cidade>{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			@SuppressWarnings("deprecation")
+			//Faz o select cidade
 			Criteria criteria = session.createCriteria(Cidade.class);
+			//faz o where estado.id = estadoId
 			criteria.add(Restrictions.eq("estado.id",estadoId));
+			//apenas ordena a cidade por nome
 			criteria.addOrder(Order.asc("nome"));
 			@SuppressWarnings("unchecked")
+			//pega a lista de cidades de uma determinada estado.
 			List<Cidade> cidades = criteria.list();
+			//retorna a lista de cidades.
 			return cidades;
 			
 		} catch (RuntimeException e) {

@@ -30,101 +30,105 @@ public class CidadeDAOTest {
 			System.out.println("City saved successfuly!");
 		}
 	}
-	
+
 	@Test
 	@Ignore
 	public void listar() {
-		
+
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		List<Cidade> cidades = cidadeDAO.findAll();
-		
-		for(Cidade cidade: cidades) {
-			System.out.println("Cidade: " + cidade.getId() + " " + cidade.getNome() + 
-					"\nEstado: " + cidade.getEstado().getId() + " " +
-					cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
+
+		for (Cidade cidade : cidades) {
+			System.out.println(
+					"Cidade: " + cidade.getId() + " " + cidade.getNome() + "\nEstado: " + cidade.getEstado().getId()
+							+ " " + cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
 		}
 	}
 
 	@Test
 	@Ignore
 	public void buscar() {
-		
+
 		Long codigo = 5L;
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		Cidade cidade = cidadeDAO.findById(codigo);
-		
-		if(cidade == null) {
+
+		if (cidade == null) {
 			System.out.println("Register not found!");
-		}else {		
+		} else {
 			System.out.println("Register founded!");
-			System.out.println("Cidade: " + cidade.getId() + " " + cidade.getNome() + 
-					"\nEstado: " + cidade.getEstado().getId() + " " +
-					cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
+			System.out.println(
+					"Cidade: " + cidade.getId() + " " + cidade.getNome() + "\nEstado: " + cidade.getEstado().getId()
+							+ " " + cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
 		}
 	}
-	
+
 	@Test
 	@Ignore
 	public void excluir() {
-		
+
 		Long cidadeId = 15L;
 		CidadeDAO cidadeDAO = new CidadeDAO();
-		Cidade cidade = cidadeDAO.findById(cidadeId);		
-		
+		Cidade cidade = cidadeDAO.findById(cidadeId);
+
 		if (cidade == null) {
 			System.out.println("Register not found");
-		}else {
+		} else {
 			System.out.println("register founded!\n");
 			cidadeDAO.delete(cidade);
 			System.out.println("City Removed successfuly!!");
-			System.out.println("Cidade: " + cidade.getId() + " " + cidade.getNome() + 
-					"\nEstado: " + cidade.getEstado().getId() + " " +
-					cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
-		}		
+			System.out.println(
+					"Cidade: " + cidade.getId() + " " + cidade.getNome() + "\nEstado: " + cidade.getEstado().getId()
+							+ " " + cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
+		}
 	}
-	
+
 	@SuppressWarnings("unused")
 	@Test
 	@Ignore
 	public void editar() {
-		
+
 		Long cidadeId = 15L;
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		Cidade cidade = cidadeDAO.findById(cidadeId);
-		
+
 		Long estadoId = 10L;
 		EstadoDAO estadoDAO = new EstadoDAO();
 		Estado estado = estadoDAO.findById(estadoId);
-		
-		if(estado == null) {
+
+		if (estado == null) {
 			System.out.println("State not found!");
-		}else if (cidade == null) {
+		} else if (cidade == null) {
 			System.out.println("Register not found!");
-		}else {
+		} else {
 			System.out.println("register founded!\n");
 			cidade.setNome("Guarapuava");
 			cidade.setEstado(estado);
 			cidadeDAO.merge(cidade);
 			System.out.println("City Removed successfuly!!");
-			System.out.println("Cidade: " + cidade.getId() + " " + cidade.getNome() + 
-					"\nEstado: " + cidade.getEstado().getId() + " " +
-					cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
-		}		
-		
+			System.out.println(
+					"Cidade: " + cidade.getId() + " " + cidade.getNome() + "\nEstado: " + cidade.getEstado().getId()
+							+ " " + cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
+		}
+
 	}
-	
+
 	@Test
-	@Ignore
+	 @Ignore
 	public void buscarPorEstado() {
-		
-		Long estadoId = 3L;
+
+		Long estadoId = 5L;
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		List<Cidade> cidades = cidadeDAO.buscarPorEstado(estadoId);
-		
-		for(Cidade cidade: cidades) {
-			System.out.println("Cidade: " + cidade.getId() + " " + cidade.getNome() + 
-					"\nEstado: " + cidade.getEstado().getId() + " " +
-					cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
+
+		if (cidades == null) {
+			System.out.println("City not found in this state!");
+		} else {
+			for (Cidade cidade : cidades) {
+				System.out.println(
+						"Cidade: " + cidade.getId() + " " + cidade.getNome() + "\nEstado: " + cidade.getEstado().getId()
+								+ " " + cidade.getEstado().getNome() + "-" + cidade.getEstado().getSigla() + "\n");
+			}
 		}
 	}
 
