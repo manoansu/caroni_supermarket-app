@@ -23,7 +23,7 @@ public class Venda extends GenericDomain {
 	private Date horario;
 
 	@Column(nullable = false, precision = 7, scale = 2)
-	private BigDecimal precototal;
+	private BigDecimal precoTotal;
 
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
@@ -45,7 +45,7 @@ public class Venda extends GenericDomain {
 
 	public Venda(Date horario, BigDecimal precototal, Cliente cliente, Funcionario funcionario) {
 		this.horario = horario;
-		this.precototal = precototal;
+		this.precoTotal = precototal;
 		this.cliente = cliente;
 		this.funcionario = funcionario;
 	}
@@ -54,12 +54,12 @@ public class Venda extends GenericDomain {
 		this.horario = horario;
 	}
 
-	public BigDecimal getPrecototal() {
-		return precototal;
+	public BigDecimal getPrecoTotal() {
+		return precoTotal;
 	}
 
-	public void setPrecototal(BigDecimal precototal) {
-		this.precototal = precototal;
+	public void setPrecoTotal(BigDecimal precototal) {
+		this.precoTotal = precototal;
 	}
 
 	public Cliente getCliente() {
@@ -84,7 +84,7 @@ public class Venda extends GenericDomain {
 
 	@Override
 	public String toString() {
-		return "Venda [horario=" + horario + ", precototal=" + precototal + ", cliente=" + cliente + ", funcionario="
+		return "Venda [horario=" + horario + ", precototal=" + precoTotal + ", cliente=" + cliente + ", funcionario="
 				+ funcionario + "]";
 	}
 

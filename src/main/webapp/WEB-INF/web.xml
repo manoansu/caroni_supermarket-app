@@ -23,6 +23,21 @@
 		<url-pattern>*.xhtml</url-pattern>
 		<!-- Define qual é o tipo de xhtml que nos stamos usando -->
 	</servlet-mapping>
+	<!-- Tema do PrimeFaaces -->
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>home</param-value>
+		<!-- Vai na pagina de Themes de primefaces: https://www.primefaces.org/themes/ e escolhe o tipo de cor que 
+			quer que entra no seu site sempre usa a letra minuscula.. -->
+	</context-param>
+	
+	<!-- Tema do PrimeFaaces -->
+	<context-param>
+		<param-name>primefaces.UPLOADER</param-name>
+		<param-value>native</param-value>
+		<!-- Vai na pagina de Themes de primefaces e escolhe o tipo de cor que 
+			quer que entra no seu site sempre usa a letra minuscula.. -->
+	</context-param>
 
 	<!-- Carregamento de Hibernate -->
 	<listener>

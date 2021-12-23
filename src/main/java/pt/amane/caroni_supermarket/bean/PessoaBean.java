@@ -2,20 +2,14 @@ package pt.amane.caroni_supermarket.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
 
 import org.omnifaces.util.Messages;
-
-import com.google.gson.Gson;
 
 import pt.amane.caroni_supermarket.dao.CidadeDAO;
 import pt.amane.caroni_supermarket.dao.EstadoDAO;
@@ -108,6 +102,9 @@ public class PessoaBean implements Serializable {
 	public void editar(ActionEvent event) {
 		try {
 			pessoa = (Pessoa) event.getComponent().getAttributes().get("pessoaSelecionado");
+			
+			estado = pessoa.getCidade().getEstado();
+			
 			EstadoDAO estadoDAO = new EstadoDAO();
 			estados = estadoDAO.findAll("nome");
 			CidadeDAO cidadeDAO = new CidadeDAO();

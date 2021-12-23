@@ -42,7 +42,7 @@
 
 	<!-- PrimeFaces Repository -->
 	<repositories>
-
+		<!-- For 3.5 and older -->
 		<repository>
 			<id>prime-repo</id>
 			<name>PrimeFaces Maven Repository</name>
@@ -74,6 +74,7 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Gson -->
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -123,7 +124,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Jersey -->
+		<!-- Jersey is Restful dependency-->
 		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet -->
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
