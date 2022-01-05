@@ -31,12 +31,10 @@
 			quer que entra no seu site sempre usa a letra minuscula.. -->
 	</context-param>
 	
-	<!-- Tema do PrimeFaaces -->
+	<!-- Definição do Mecanismo de tema do PrimeFaces -->
 	<context-param>
 		<param-name>primefaces.UPLOADER</param-name>
 		<param-value>native</param-value>
-		<!-- Vai na pagina de Themes de primefaces e escolhe o tipo de cor que 
-			quer que entra no seu site sempre usa a letra minuscula.. -->
 	</context-param>
 
 	<!-- Carregamento de Hibernate -->

@@ -17,12 +17,13 @@
 				paginator="true" value="#{estadoBean.estados}" rows="5" var="estado"
 				paginatorPosition="top">
 				<f:facet name="header">
-					<p:commandButton icon="ui-icon-plus" 
+					<p:commandButton icon="ui-icon-plus"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{estadoBean.novo()}"
-						update=":formCadEstado:panelEstado" />
-					<f:actionListener
-						type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						update=":formCadEstado:panelEstado">
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
 				</f:facet>
 
 				<p:column headerText="Nome" sortBy="#{estado.nome}"

@@ -45,6 +45,11 @@
 					<h:outputText value="#{produto.fabricante.descricao}" />
 				</p:column>
 
+				<p:column headerText="Foto">
+					<p:graphicImage cache="false" height="50" width="50"
+						url="http://localhost:8080/uploads//#{produto.id}.png" />
+				</p:column>
+
 				<p:column headerText="Opções">
 					<p:commandButton icon="ui-icon-trash"
 						actionListener="#{produtoBean.excluir}"
@@ -119,6 +124,16 @@
 					<f:validateDoubleRange minimum="0.00" maximum="9999.99 " />
 					<f:convertNumber locale="pt" minFractionDigits="2" />
 				</p:inputText>
+
+				<p:outputLabel for="upload" value="Upload:" />
+				<p:fileUpload id="upload" mode="advanced"
+					fileUploadListener="#{produtoBean.upload}"
+					update=":message :formCadProduto:foto" auto="true" />
+
+				<p:outputLabel for="foto" value="Foto:" />
+				<p:graphicImage id="foto" value="#{imagemBean.foto}">
+					<f:param name="caminho" value="#{produtoBean.produto.caminho}" />
+				</p:graphicImage>
 
 			</h:panelGrid>
 

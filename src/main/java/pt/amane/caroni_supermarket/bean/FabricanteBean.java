@@ -27,6 +27,8 @@ public class FabricanteBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Fabricante fabricante;
+	
+	private Long fabricanteId;
 
 	private List<Fabricante> fabricantes;
 
@@ -95,8 +97,14 @@ public class FabricanteBean implements Serializable {
 			
 			//converte os dados que vai ser salvo para json..
 			String json = gson.toJson(fabricante);
-			//Passa o dado Json na requisiçao post para salvar na BD.
-			restServicePath.request().post(Entity.json(json));
+			
+			if(fabricante.getId() == fabricanteId) {						
+				//Passa o dado Json na requisiçao post para salvar na BD.
+				restServicePath.request().put(Entity.json(json));
+			}else {
+				//Passa o dado Json na requisiçao post para salvar na BD.
+				restServicePath.request().post(Entity.json(json));
+			}
 			
 			//apenas instancia o fabricante para limpar a tela..
 			fabricante = new Fabricante();
@@ -108,8 +116,7 @@ public class FabricanteBean implements Serializable {
 			Fabricante[] vetorFabricante = gson.fromJson(json, Fabricante[].class);
 			// converte o vetor de string em um arrayList.
 			fabricantes = Arrays.asList(vetorFabricante);
-			
-			
+						
 			Messages.addGlobalInfo("Successfully saved factories!");
 		} catch (Exception e) {
 			Messages.addGlobalError("Error trying to saved factories!");
@@ -119,6 +126,7 @@ public class FabricanteBean implements Serializable {
 
 	public void editar(ActionEvent event) {
 		fabricante = (Fabricante) event.getComponent().getAttributes().get("fabricanteSelecionado");
+		fabricanteId = fabricante.getId();
 	}
 
 	public void excluir(ActionEvent event) {

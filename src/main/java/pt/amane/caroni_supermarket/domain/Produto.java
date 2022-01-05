@@ -1,15 +1,13 @@
 package pt.amane.caroni_supermarket.domain;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Produto extends GenericDomain {
@@ -25,15 +23,12 @@ public class Produto extends GenericDomain {
 	@Column(nullable = false, precision = 6, scale = 2)
 	private BigDecimal preco;
 
+	@Transient
+	private String caminho;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fabricante_id", nullable = false)
 	private Fabricante fabricante;
-
-	@OneToMany(mappedBy = "produto")
-	private List<ItemVenda> itemVendas = new ArrayList<ItemVenda>();
-
-	@OneToMany(mappedBy = "produto")
-	private List<Historico> historicos = new ArrayList<Historico>();
 
 	public Produto() {
 	}
@@ -77,12 +72,12 @@ public class Produto extends GenericDomain {
 		this.fabricante = fabricante;
 	}
 
-	public List<ItemVenda> getItemVendas() {
-		return itemVendas;
+	public String getCaminho() {
+		return caminho;
 	}
 
-	public List<Historico> getHistoricos() {
-		return historicos;
+	public void setCaminho(String caminho) {
+		this.caminho = caminho;
 	}
 
 	@Override

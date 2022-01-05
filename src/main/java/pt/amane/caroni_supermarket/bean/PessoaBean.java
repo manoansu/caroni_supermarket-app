@@ -103,12 +103,13 @@ public class PessoaBean implements Serializable {
 		try {
 			pessoa = (Pessoa) event.getComponent().getAttributes().get("pessoaSelecionado");
 			
+			// navegar na composição para pegar estado...
 			estado = pessoa.getCidade().getEstado();
 			
 			EstadoDAO estadoDAO = new EstadoDAO();
 			estados = estadoDAO.findAll("nome");
 			CidadeDAO cidadeDAO = new CidadeDAO();
-			cidades = cidadeDAO.findAll("nome");
+			cidades = cidadeDAO.buscarPorEstado(estado.getId());
 		} catch (RuntimeException e) {
 			Messages.addGlobalError("Error trying to edited person!");
 			e.printStackTrace();

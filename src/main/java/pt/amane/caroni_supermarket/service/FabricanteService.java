@@ -66,7 +66,7 @@ public class FabricanteService {
 		try {
 			Fabricante fabricante = gson.fromJson(fabricanteJson, Fabricante.class);
 			FabricanteDAO fabricanteDAO = new FabricanteDAO();
-			fabricanteDAO.merge(fabricante);
+			fabricanteDAO.salvar(fabricante);
 			System.out.println("Successfully saved factory!");
 			String fabricanteSalvo = gson.toJson(fabricante);
 			return fabricanteSalvo;
@@ -84,7 +84,7 @@ public class FabricanteService {
 		try {
 			Fabricante fabricante = gson.fromJson(fabricanteJson, Fabricante.class);
 			FabricanteDAO fabricanteDAO = new FabricanteDAO();
-			fabricanteDAO.merge(fabricante);
+			fabricanteDAO.update(fabricante);
 			System.out.println("Successfully edited factory!");
 			String fabricanteEditado = gson.toJson(fabricante);
 			return fabricanteEditado;
